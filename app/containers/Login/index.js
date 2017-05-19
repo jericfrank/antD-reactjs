@@ -8,7 +8,9 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
+import _ from 'lodash';
 import makeSelectLogin from './selectors';
+import { FIELDS } from './constants';
 
 import styled from 'styled-components';
 
@@ -17,19 +19,29 @@ import { Form, Icon, Input, Button, Checkbox } from 'antd';
 const FormItem = Form.Item;
 
 const WrapperLoginForm = styled.div`
+  padding: 10px;
+
   .login-form {
     max-width: 300px;
   }
+
   .login-form-forgot {
     float: right;
   }
+
   .login-form-button {
     width: 100%;
   }
 `;
 
 export class Login extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  handleSubmit = (e) => {
+  constructor() {
+    super();
+
+    this.renderField = this.renderField.bind( this );
+  }
+
+  handleSubmit(e){
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
@@ -38,9 +50,19 @@ export class Login extends React.PureComponent { // eslint-disable-line react/pr
     });
   }
 
-  render() {
+  renderField(field, key) {
     const { getFieldDecorator } = this.props.form;
 
+    return (
+      <FormItem key={key} >
+        {getFieldDecorator( key, { rules : field.rules })(
+          <Input prefix={<Icon type={field.icon} style={{ fontSize: 13 }} />} placeholder={field.placeholder} />
+        )}
+      </FormItem>
+    );
+  }
+
+  render() {
     return (
       <div>
         <Helmet
@@ -51,32 +73,13 @@ export class Login extends React.PureComponent { // eslint-disable-line react/pr
         />
         <WrapperLoginForm>
           <Form onSubmit={this.handleSubmit} className="login-form">
+            { _.map( FIELDS, this.renderField )}
             <FormItem>
-              {getFieldDecorator('UserName', {
-                rules: [{ required: true, message: 'Please input your Username!' }],
-              })(
-                <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />
-              )}
-            </FormItem>
-            <FormItem>
-              {getFieldDecorator('Password', {
-                rules: [{ required: true, message: 'Please input your Password!' }],
-              })(
-                <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" />
-              )}
-            </FormItem>
-            <FormItem>
-              {getFieldDecorator('Remember', {
-                valuePropName: 'checked',
-                initialValue: true,
-              })(
-                <Checkbox>Remember me</Checkbox>
-              )}
-              <a className="login-form-forgot" href="">Forgot password</a>
               <Button type="primary" htmlType="submit" className="login-form-button">
                 Log in
               </Button>
-              Or <a href="">register now!</a>
+              <a href="">Register now!</a>
+              <a className="login-form-forgot" href="">Forgot password</a>
             </FormItem>
           </Form>
         </WrapperLoginForm>
