@@ -12,33 +12,18 @@ import _ from 'lodash';
 import makeSelectLogin from './selectors';
 import { FIELDS } from './constants';
 
-import styled from 'styled-components';
-
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
 const FormItem = Form.Item;
 
-const WrapperLoginForm = styled.div`
-  padding: 10px;
-
-  .login-form {
-    max-width: 300px;
-  }
-
-  .login-form-forgot {
-    float: right;
-  }
-
-  .login-form-button {
-    width: 100%;
-  }
-`;
+import { WrapperLoginForm, LoginBackground } from './css';
 
 export class Login extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor() {
     super();
 
-    this.renderField = this.renderField.bind( this );
+    this.renderField  = this.renderField.bind( this );
+    this.handleSubmit = this.handleSubmit.bind( this );
   }
 
   handleSubmit(e){
@@ -56,7 +41,7 @@ export class Login extends React.PureComponent { // eslint-disable-line react/pr
     return (
       <FormItem key={key} >
         {getFieldDecorator( key, { rules : field.rules })(
-          <Input prefix={<Icon type={field.icon} style={{ fontSize: 13 }} />} placeholder={field.placeholder} />
+          <Input prefix={<Icon type={field.icon} style={{ fontSize: 13 }} />} type={field.type} placeholder={field.placeholder} />
         )}
       </FormItem>
     );
@@ -64,7 +49,7 @@ export class Login extends React.PureComponent { // eslint-disable-line react/pr
 
   render() {
     return (
-      <div>
+      <LoginBackground>
         <Helmet
           title="Login Dope"
           meta={[
@@ -83,7 +68,7 @@ export class Login extends React.PureComponent { // eslint-disable-line react/pr
             </FormItem>
           </Form>
         </WrapperLoginForm>
-      </div>
+      </LoginBackground>
     );
   }
 }
