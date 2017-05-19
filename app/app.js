@@ -38,6 +38,10 @@ import configureStore from './store';
 // Import i18n messages
 import { translationMessages } from './i18n';
 
+// ant D
+import { LocaleProvider } from 'antd';
+import enUS from 'antd/lib/locale-provider/en_US';
+
 // Import CSS reset and Global Styles
 import './global-styles';
 
@@ -67,17 +71,19 @@ const rootRoute = {
 const render = (messages) => {
   ReactDOM.render(
     <Provider store={store}>
-      <LanguageProvider messages={messages}>
-        <Router
-          history={history}
-          routes={rootRoute}
-          render={
-            // Scroll to top when going to a new page, imitating default browser
-            // behaviour
-            applyRouterMiddleware(useScroll())
-          }
-        />
-      </LanguageProvider>
+      <LocaleProvider locale={enUS}>
+        <LanguageProvider messages={messages}>
+          <Router
+            history={history}
+            routes={rootRoute}
+            render={
+              // Scroll to top when going to a new page, imitating default browser
+              // behaviour
+              applyRouterMiddleware(useScroll())
+            }
+          />
+        </LanguageProvider>
+      </LocaleProvider>
     </Provider>,
     document.getElementById('app')
   );
