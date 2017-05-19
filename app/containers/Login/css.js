@@ -31,13 +31,23 @@ export const LoginBackground = styled.div`
     border        : 1px solid #273135;
     border-radius : 3px;
   }
+`;
 
-  .link-back {
-    color         : rgba(0, 0, 0, 0.870588);
-  }
+export const DivHeader = styled.div`
+  display : block;
+  text-align : center;
+  padding-bottom: 20px;
 
-  .alert {
-    margin-top : 10px;
-    margin-bottom : 10px;
+  span {
+    letter-spacing : 2px;
+    text-transform : uppercase;
+    line-height    : 170%;
   }
+`;
+
+export const Img = styled.img`
+  display       : block;
+  margin        : auto;
+  margin-bottom : 20px;
+  width         : 100px;
 `;

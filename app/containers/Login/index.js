@@ -16,7 +16,9 @@ import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
 const FormItem = Form.Item;
 
-import { WrapperLoginForm, LoginBackground } from './css';
+import { WrapperLoginForm, LoginBackground, DivHeader, Img } from './css';
+
+import Logo from './guns.png';
 
 export class Login extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor() {
@@ -58,12 +60,16 @@ export class Login extends React.PureComponent { // eslint-disable-line react/pr
         />
         <WrapperLoginForm>
           <Form onSubmit={this.handleSubmit} className="login-form">
+            <Img src={Logo} />
+            <DivHeader>
+              <span>Guns Store</span>
+            </DivHeader>
             { _.map( FIELDS, this.renderField )}
             <FormItem>
               <Button type="primary" htmlType="submit" className="login-form-button">
                 Log in
               </Button>
-              <a href="">Register now!</a>
+              <a href="">Register</a>
               <a className="login-form-forgot" href="">Forgot password</a>
             </FormItem>
           </Form>
