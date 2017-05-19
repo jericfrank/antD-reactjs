@@ -30,5 +30,9 @@ export const FIELDS = {
       }
     ],
     icon : 'lock',
+  },
+  Remember : {
+    type        : 'checkbox',
+    label       : 'Remember me',
   }
 }

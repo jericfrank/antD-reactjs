@@ -12,13 +12,15 @@ import _ from 'lodash';
 import makeSelectLogin from './selectors';
 import { FIELDS } from './constants';
 
+import Field from 'components/Fields';
+
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
 const FormItem = Form.Item;
 
 import { WrapperLoginForm, LoginBackground, DivHeader, Img } from './css';
 
-import Logo from './guns.png';
+import Logo from './logo.png';
 
 export class Login extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor() {
@@ -41,11 +43,7 @@ export class Login extends React.PureComponent { // eslint-disable-line react/pr
     const { getFieldDecorator } = this.props.form;
 
     return (
-      <FormItem key={key} >
-        {getFieldDecorator( key, { rules : field.rules })(
-          <Input prefix={<Icon type={field.icon} style={{ fontSize: 13 }} />} type={field.type} placeholder={field.placeholder} />
-        )}
-      </FormItem>
+      <Field field={field} name={key} key={key} form={this.props.form} />
     );
   }
 
