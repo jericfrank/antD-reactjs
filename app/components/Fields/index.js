@@ -6,7 +6,7 @@
 
 import React from 'react';
 // import styled from 'styled-components';
-import { Form, Icon, Input, Checkbox } from 'antd';
+import { Form, Icon, Input, Checkbox, DatePicker } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -14,6 +14,7 @@ const renderMethods = {
   text     : 'renderTextField',
   password : 'renderTextField',
   checkbox : 'renderCheckBoxField',
+  date     : 'renderDateField'
 };
 
 const style = {
@@ -26,6 +27,18 @@ class Fields extends React.Component { // eslint-disable-line react/prefer-state
 
     this.renderTextField     = this.renderTextField.bind( this );
     this.renderCheckBoxField = this.renderCheckBoxField.bind( this );
+  }
+
+  renderDateField(form, field, name){
+    return (
+      <FormItem>
+        {form.getFieldDecorator( name, {
+          rules: field.rules
+        })(
+          <DatePicker style={{ width: '100%' }} placeholder={field.placeholder} />
+        )}
+      </FormItem>
+    );
   }
 
   renderCheckBoxField(form, field, name){

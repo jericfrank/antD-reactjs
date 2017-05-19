@@ -1,6 +1,6 @@
 /*
  *
- * Login
+ * Register
  *
  */
 
@@ -10,29 +10,37 @@ import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import _ from 'lodash';
-import makeSelectLogin from './selectors';
+import makeSelectRegister from './selectors';
 import { FIELDS } from './constants';
 
 import { RouteLinks } from 'containers/App/constants'
 
 import Field from 'components/Fields';
 
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Button } from 'antd';
 
 const FormItem = Form.Item;
 
-import { WrapperLoginForm, AuthBackground, DivHeader, Img } from './css';
+import Logo from '../Login/logo.png';
 
-import Logo from './logo.png';
+import { Img, DivHeader, WrapperLoginForm, AuthBackground } from '../Login/css';
 
-const register = _.find( RouteLinks, { name : 'Register'} );
+const login = _.find( RouteLinks, { name : 'Login'} );
 
-export class Login extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class Register extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor() {
     super();
 
     this.renderField  = this.renderField.bind( this );
     this.handleSubmit = this.handleSubmit.bind( this );
+  }
+
+  renderField(field, key) {
+    const { getFieldDecorator } = this.props.form;
+
+    return (
+      <Field field={field} name={key} key={key} form={this.props.form} />
+    );
   }
 
   handleSubmit(e){
@@ -44,36 +52,28 @@ export class Login extends React.PureComponent { // eslint-disable-line react/pr
     });
   }
 
-  renderField(field, key) {
-    const { getFieldDecorator } = this.props.form;
-
-    return (
-      <Field field={field} name={key} key={key} form={this.props.form} />
-    );
-  }
-
   render() {
     return (
       <AuthBackground>
         <Helmet
-          title="Login Dope"
+          title="Register"
           meta={[
-            { name: 'description', content: 'Description of Login' },
+            { name: 'description', content: 'Description of Register' },
           ]}
         />
         <WrapperLoginForm>
-          <Form onSubmit={this.handleSubmit} className="login-form">
+          <Form onSubmit={this.handleSubmit} className="register-form">
             <Img src={Logo} />
             <DivHeader>
-              <span>SILKROAD - LOGIN</span>
+              <span>SILKROAD - REGISTER</span>
             </DivHeader>
             { _.map( FIELDS, this.renderField )}
             <FormItem>
               <Button type="primary" htmlType="submit" className="login-form-button">
-                Log in
-              </Button>
-              Or <Link to={register.path}>
                 Register
+              </Button>
+              Or <Link to={login.path}>
+                Login
               </Link>
             </FormItem>
           </Form>
@@ -83,12 +83,12 @@ export class Login extends React.PureComponent { // eslint-disable-line react/pr
   }
 }
 
-Login.propTypes = {
+Register.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  Login: makeSelectLogin(),
+  Register: makeSelectRegister(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -97,6 +97,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-Login = Form.create()(Login);
+Register = Form.create()(Register);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

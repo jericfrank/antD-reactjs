@@ -10,3 +10,11 @@
  */
 
 export const DEFAULT_LOCALE = 'en';
+
+export const RouteLinks = [ {
+  name  : 'Login',
+  path  : '/login'
+}, {
+  name  : 'Register',
+  path  : '/register'
+} ];

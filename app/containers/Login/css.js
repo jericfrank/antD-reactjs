@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const WrapperLoginForm = styled.div`
   .login-form {
-    max-width: 300px;
+    max-width: 500px;
   }
 
   .login-form-forgot {
@@ -14,7 +14,7 @@ export const WrapperLoginForm = styled.div`
   }
 `;
 
-export const LoginBackground = styled.div`
+export const AuthBackground = styled.div`
   display          : flex;
   flex-direction   : column;
   min-height       : 100vh;
@@ -22,8 +22,18 @@ export const LoginBackground = styled.div`
   justify-content  : center;
   background-color : #273135;
 
-  form {
+  .login-form {
     width         : 340px;
+    margin        : 0;
+    padding       : 3em 2em 2em 2em;
+    color         : rgba(0, 0, 0, 0.870588);
+    background    : #fafafa;
+    border        : 1px solid #273135;
+    border-radius : 3px;
+  }
+
+  .register-form {
+    width         : 500px;
     margin        : 0;
     padding       : 3em 2em 2em 2em;
     color         : rgba(0, 0, 0, 0.870588);
