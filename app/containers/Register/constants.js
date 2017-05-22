@@ -29,7 +29,7 @@ export const FIELDS = {
         message  : 'Please input your Birthdate!'
       }
     ],
-    icon : 'user',
+    icon : 'calendar',
   },
   UserName : {
     type        : 'text',
@@ -54,17 +54,5 @@ export const FIELDS = {
       }
     ],
     icon : 'lock',
-  },
-  Confirm : {
-    type        : 'password',
-    label       : 'Confirm Password',
-    placeholder : 'Confirm Password',
-    rules       : [
-      {
-        required : true,
-        message  : 'Please input your Confirm Password!'
-      }
-    ],
-    icon : 'lock',
-  },
+  }
 }

@@ -35,7 +35,8 @@ class Fields extends React.Component { // eslint-disable-line react/prefer-state
         {form.getFieldDecorator( name, {
           rules: field.rules
         })(
-          <DatePicker style={{ width: '100%' }} placeholder={field.placeholder} />
+          <Input prefix={<Icon type={field.icon} style={{ style }} />} type={field.type} placeholder={field.placeholder} />
+          // <DatePicker style={{ width: '100%' }} placeholder={field.placeholder} />
         )}
       </FormItem>
     );
