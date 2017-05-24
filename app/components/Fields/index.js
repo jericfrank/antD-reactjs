@@ -12,7 +12,8 @@ const FormItem = Form.Item;
 
 const renderMethods = {
   text     : 'renderTextField',
-  password : 'renderTextField',
+  password : 'renderPasswordField',
+  confirm  : 'renderConfirmField',
   checkbox : 'renderCheckBoxField',
   date     : 'renderDateField'
 };
@@ -27,6 +28,32 @@ class Fields extends React.Component { // eslint-disable-line react/prefer-state
 
     this.renderTextField     = this.renderTextField.bind( this );
     this.renderCheckBoxField = this.renderCheckBoxField.bind( this );
+    this.renderPasswordField = this.renderPasswordField.bind( this );
+    this.renderConfirmField  = this.renderConfirmField.bind( this );
+    this.renderDateField     = this.renderDateField.bind( this );
+
+    this.checkConfirm         = this.checkConfirm.bind( this );
+    this.checkPassword        = this.checkPassword.bind( this );
+  }
+
+  checkConfirm (rule, value, callback){
+    const form = this.props.form;
+
+    if (form.getFieldValue('Confirm')) {
+      form.validateFields(['Confirm'], { force: true });
+    }
+
+    callback();
+  }
+
+  checkPassword(rule, value, callback){
+    const form = this.props.form;
+
+    if (value && value !== form.getFieldValue('Password')) {
+      callback('Password mismatch!');
+    } else {
+      callback();
+    }
   }
 
   renderDateField(form, field, name){
@@ -62,6 +89,44 @@ class Fields extends React.Component { // eslint-disable-line react/prefer-state
           rules: field.rules
         })(
           <Input prefix={<Icon type={field.icon} style={{ style }} />} type={field.type} placeholder={field.placeholder} />
+        )}
+      </FormItem>
+    );
+  }
+
+  renderPasswordField(form, field, name){
+    return (
+      <FormItem>
+        {form.getFieldDecorator( name, {
+          rules: [
+            {
+              required : true,
+              message  : 'Please input your Password!'
+            },{
+              validator: this.checkConfirm
+            }
+          ]
+        })(
+          <Input prefix={<Icon type={field.icon} style={{ style }} />} type="password" placeholder={field.placeholder}/>
+        )}
+      </FormItem>
+    );
+  }
+
+  renderConfirmField(form, field, name){
+    return (
+      <FormItem>
+        {form.getFieldDecorator( name, {
+          rules: [
+            {
+              required : true,
+              message  : 'Please input your Password Confirmation!'
+            },{
+              validator: this.checkPassword
+            }
+          ]
+        })(
+          <Input prefix={<Icon type={field.icon} style={{ style }} />} type="password" placeholder={field.placeholder}/>
         )}
       </FormItem>
     );

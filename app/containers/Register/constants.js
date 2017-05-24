@@ -43,16 +43,16 @@ export const FIELDS = {
     ],
     icon : 'user',
   },
-  Password : {
+  Password : {//static
     type        : 'password',
     label       : 'Password',
     placeholder : 'Password',
-    rules       : [
-      {
-        required : true,
-        message  : 'Please input your Password!'
-      }
-    ],
     icon : 'lock',
+  },
+  Confirm : {//static
+    type        : 'confirm',
+    label       : 'Confirm Password',
+    placeholder : 'Confirm Password',
+    icon : 'unlock',
   }
 }
