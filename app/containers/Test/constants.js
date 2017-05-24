@@ -18,9 +18,12 @@ export const FIELDS = {
       {
         required : true,
         message  : 'Please input your Email!'
+      },
+      {
+        type: 'email',
+        message: 'The input is not valid E-mail!',
       }
     ],
-    icon : 'mail',
   },
   Address : {
     type        : 'text',
@@ -32,7 +35,6 @@ export const FIELDS = {
         message  : 'Please input your Address!'
       }
     ],
-    icon : 'calendar',
   },
   Title : {
     type        : 'text',
@@ -43,7 +45,15 @@ export const FIELDS = {
         required : true,
         message  : 'Please input your Title!'
       }
-    ],
-    icon : 'user',
+    ]
+  },
+  Agreement : {
+    type        : 'checkbox',
+    label       : 'I have read the agreement',
+    placeholder : 'Agreement'
+  },
+  Submit : {
+    type        : 'button',
+    label       : 'Submit'
   }
 }

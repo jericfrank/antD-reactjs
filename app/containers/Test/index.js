@@ -35,6 +35,8 @@ export class Test extends React.PureComponent { // eslint-disable-line react/pre
   render() {
     const { loading } = this.props;
 
+    console.log( this.props );
+
     return (
       <div>
         <Helmet
