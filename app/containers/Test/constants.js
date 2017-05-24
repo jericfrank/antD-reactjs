@@ -5,6 +5,9 @@
  */
 
 export const DEFAULT_ACTION = 'app/Test/DEFAULT_ACTION';
+export const RECORD_SUBMIT  = 'app/Test/RECORD_SUBMIT';
+export const RECORD_SUCCESS = 'app/Test/RECORD_SUCCESS';
+export const RECORD_ERROR   = 'app/Test/RECORD_ERROR';
 
 export const FIELDS = {
   Email : {
