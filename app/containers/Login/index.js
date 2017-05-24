@@ -15,7 +15,7 @@ import { FIELDS } from './constants';
 
 import { RouteLinks } from 'containers/App/constants'
 
-import Field from 'components/Fields';
+import Field from 'components/Field';
 
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 

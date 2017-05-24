@@ -10,7 +10,27 @@ import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import makeSelectTest from './selectors';
 
+import { Spin } from 'antd';
+
+import { FIELDS } from './constants';
+import Form from 'components/FormField';
+
 export class Test extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  constructor() {
+    super();
+
+    this.handleSubmit = this.handleSubmit.bind( this );
+
+    this.state = {
+      loading: false
+    };
+  }
+
+  handleSubmit(values){
+    console.log( values );
+    this.setState({ loading: true });
+  }
+
   render() {
     return (
       <div>
@@ -20,6 +40,9 @@ export class Test extends React.PureComponent { // eslint-disable-line react/pre
             { name: 'description', content: 'Description of Test' },
           ]}
         />
+        <Spin spinning={this.state.loading} tip="Loading...">
+          <Form fields={FIELDS} submit={this.handleSubmit}/>
+        </Spin>
       </div>
     );
   }
@@ -39,4 +62,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Test);
+export default connect(mapStateToProps, mapDispatchToProps)( Test );

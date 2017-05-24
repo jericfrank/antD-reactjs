@@ -144,7 +144,9 @@ class Fields extends React.Component { // eslint-disable-line react/prefer-state
 }
 
 Fields.propTypes = {
-
+  form  : React.PropTypes.object,
+  field : React.PropTypes.object,
+  name  : React.PropTypes.string
 };
 
 export default Fields;
