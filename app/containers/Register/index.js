@@ -10,14 +10,15 @@ import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import _ from 'lodash';
-import makeSelectRegister from './selectors';
+import { makeSelectLoading, makeSelectSuccess, makeSelectError } from './selectors';
 import { FIELDS } from './constants';
+import { registerSubmit, registerClear } from './actions';
 
 import { RouteLinks } from 'containers/App/constants'
 
 import Field from 'components/Field';
 
-import { Form, Button } from 'antd';
+import { Spin, Form, Button } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -36,8 +37,6 @@ export class Register extends React.PureComponent { // eslint-disable-line react
   }
 
   renderField(field, key) {
-    const { getFieldDecorator } = this.props.form;
-
     return (
       <Field field={field} name={key} key={key} form={this.props.form} />
     );
@@ -47,12 +46,14 @@ export class Register extends React.PureComponent { // eslint-disable-line react
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        this.props.registerSubmit( values );
       }
     });
   }
 
   render() {
+    const { loading, success } = this.props;
+
     return (
       <AuthBackground>
         <Helmet
@@ -62,21 +63,23 @@ export class Register extends React.PureComponent { // eslint-disable-line react
           ]}
         />
         <WrapperLoginForm>
-          <Form onSubmit={this.handleSubmit} className="register-form">
-            <Img src={Logo} />
-            <DivHeader>
-              <span>SILKROAD - REGISTER</span>
-            </DivHeader>
-            { _.map( FIELDS, this.renderField )}
-            <FormItem>
-              <Button type="primary" htmlType="submit" className="login-form-button">
-                Register
-              </Button>
-              Or <Link to={login.path}>
-                Login
-              </Link>
-            </FormItem>
-          </Form>
+          <Spin spinning={loading} tip="Loading...">
+            <Form onSubmit={this.handleSubmit} className="register-form">
+              <Img src={Logo} />
+              <DivHeader>
+                <span>SILKROAD - REGISTER</span>
+              </DivHeader>
+              { _.map( FIELDS, this.renderField )}
+              <FormItem>
+                <Button type="primary" htmlType="submit" className="login-form-button">
+                  Register
+                </Button>
+                Or <Link to={login.path}>
+                  Login
+                </Link>
+              </FormItem>
+            </Form>
+          </Spin>
         </WrapperLoginForm>
       </AuthBackground>
     );
@@ -88,12 +91,16 @@ Register.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  Register: makeSelectRegister(),
+  loading : makeSelectLoading(),
+  success : makeSelectSuccess(),
+  error   : makeSelectError()
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    registerSubmit : ( payload ) => dispatch( registerSubmit( payload ) ),
+    registerClear : () => dispatch( registerClear() )
   };
 }
 

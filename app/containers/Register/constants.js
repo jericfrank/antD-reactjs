@@ -4,7 +4,11 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/Register/DEFAULT_ACTION';
+export const DEFAULT_ACTION   = 'app/Register/DEFAULT_ACTION';
+export const REGISTER_SUBMIT  = 'app/Register/REGISTER_SUBMIT';
+export const REGISTER_SUCCESS = 'app/Register/REGISTER_SUCCESS';
+export const REGISTER_ERROR   = 'app/Register/REGISTER_ERROR';
+export const REGISTER_CLEAR   = 'app/Register/REGISTER_CLEAR';
 
 export const FIELDS = {
   Email : {
