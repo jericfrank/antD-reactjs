@@ -16,7 +16,7 @@ export function* submit({ payload }) {
   try {
     const response = yield call( postRequest,'/auth/register', payload );
 
-    yield put( registerSuccess({ data: [payload], message: 'Success request' }) );
+    yield put( registerSuccess({ data: response, message: 'Success request' }) );
   } catch ( err ) {
     yield put( registerError( err.error ) );
   }

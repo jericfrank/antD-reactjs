@@ -18,7 +18,7 @@ import { RouteLinks } from 'containers/App/constants'
 
 import Field from 'components/Field';
 
-import { Spin, Form, Button } from 'antd';
+import { Alert, Spin, Form, Button } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -33,6 +33,7 @@ export class Register extends React.PureComponent { // eslint-disable-line react
     super();
 
     this.renderField  = this.renderField.bind( this );
+    this.renderAlert  = this.renderAlert.bind( this );
     this.handleSubmit = this.handleSubmit.bind( this );
   }
 
@@ -40,6 +41,44 @@ export class Register extends React.PureComponent { // eslint-disable-line react
     return (
       <Field field={field} name={key} key={key} form={this.props.form} />
     );
+  }
+
+  renderAlert() {
+    const { error, success, form } = this.props;
+
+    let html = '';
+
+    if ( error ) {
+      const li = _.map( error, ( value, key ) => {
+        return (
+          <li>{value}</li>
+        );
+      });
+
+      html = (
+        <Alert
+          message="Error"
+          description={li}
+          type="error"
+          showIcon
+        />
+      );
+    }
+
+    if ( success ) {
+      form.resetFields();
+
+      html = (
+        <Alert
+          message="Success"
+          description="Please login your account."
+          type="success"
+          showIcon
+        />
+      );
+    }
+
+    return html;
   }
 
   handleSubmit(e){
@@ -52,7 +91,7 @@ export class Register extends React.PureComponent { // eslint-disable-line react
   }
 
   render() {
-    const { loading, success } = this.props;
+    const { loading } = this.props;
 
     return (
       <AuthBackground>
@@ -69,6 +108,7 @@ export class Register extends React.PureComponent { // eslint-disable-line react
               <DivHeader>
                 <span>SILKROAD - REGISTER</span>
               </DivHeader>
+              { this.renderAlert() }
               { _.map( FIELDS, this.renderField )}
               <FormItem>
                 <Button type="primary" htmlType="submit" className="login-form-button">
