@@ -10,7 +10,8 @@
  */
 
 export const DEFAULT_LOCALE = 'en';
-export const AUTH_TOKEN = 'app/App/AUTH_TOKEN';
+export const DEFAULT_ACTION = 'app/App/DEFAULT_ACTION';
+export const APP_AUTH_TOKEN = 'app/App/APP_AUTH_TOKEN';
 
 export const RouteLinks = [ {
   name  : 'Login',

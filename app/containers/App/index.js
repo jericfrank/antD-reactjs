@@ -12,18 +12,44 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
-export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+import { makeSelectAuth } from './selectors';
+
+import Header from 'components/Header';
+
+class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     children: React.PropTypes.node,
   };
 
+  renderHeader(){
+    const { auth } = this.props;
+
+    if ( auth.user ) {
+      return (
+        <Header user={auth.user}/>
+      );
+    }
+
+    return '';
+  }
+
   render() {
     return (
       <div>
+        {this.renderHeader()}
         {React.Children.toArray(this.props.children)}
       </div>
     );
   }
 }
+
+const mapStateToProps = createStructuredSelector({
+  auth: makeSelectAuth()
+});
+
+export default connect(mapStateToProps, null)(App);
+

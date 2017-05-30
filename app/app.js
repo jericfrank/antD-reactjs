@@ -50,7 +50,7 @@ import createRoutes from './routes';
 
 import CryptoJS from 'crypto-js';
 
-import { loginToken } from 'containers/Login/actions';
+import { appLoginToken } from 'containers/App/actions';
 
 import { expireJwtToken } from 'utils/jwtToken';
 // Create redux store with history
@@ -78,9 +78,8 @@ if ( localStorage.getItem( 'appToken' ) ) {
   try {
     const jsonString = CryptoJS.AES.decrypt( localStorage.getItem( 'appUser' ), localStorage.getItem( 'appToken' ) )
     const User       = JSON.parse( jsonString.toString( CryptoJS.enc.Utf8 ) );
-
     // setAuthorizationToken( localStorage.getItem( 'greasyToken' ) );
-    store.dispatch( loginToken({ 'token' : localStorage.getItem( 'appToken' ), 'user' : User }) );
+    store.dispatch( appLoginToken({ 'token' : localStorage.getItem( 'appToken' ), 'user' : User }) );
   } catch ( err ) {
     expireJwtToken();
   }

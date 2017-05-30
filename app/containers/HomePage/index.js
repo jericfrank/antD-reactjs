@@ -13,19 +13,12 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
-import Header from 'components/Header';
-
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const { authData } = this.props;
-
     return (
-      <div>
-        <h1>
-          <FormattedMessage {...messages.header} />
-        </h1>
-        <Header user={authData.user}/>
-      </div>
+      <h1>
+        <FormattedMessage {...messages.header} />
+      </h1>
     );
   }
 }

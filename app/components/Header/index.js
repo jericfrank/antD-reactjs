@@ -12,8 +12,6 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
   render() {
     const { name, email, created_at } = this.props.user;
 
-    console.log( this.props.user );
-
     return (
       <ul>
         <li>email: {email}</li>
