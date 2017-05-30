@@ -11,7 +11,8 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  auth : {}
+  currentUser : {},
+  authenticated : false,
 });
 
 function globalReducer(state = initialState, action) {
@@ -21,7 +22,8 @@ function globalReducer(state = initialState, action) {
 
     case APP_AUTH_TOKEN:
       return state
-        .set( 'auth', action.payload );
+        .set( 'currentUser', action.payload )
+        .set( 'authenticated', true );
 
     default:
       return state;

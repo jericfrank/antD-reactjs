@@ -19,12 +19,18 @@ const makeSelectLocationState = () => {
 
 const selectGlobal = ( state ) => state.get( 'global' );
 
-const makeSelectAuth = () => createSelector(
+const makeSelectCurrentUser = () => createSelector(
   selectGlobal,
-  (substate) => substate.get( 'auth' )
+  (substate) => substate.get( 'currentUser' )
+);
+
+const makeSelectAuthenticated = () => createSelector(
+  selectGlobal,
+  (substate) => substate.get( 'authenticated' )
 );
 
 export {
   makeSelectLocationState,
-  makeSelectAuth
+  makeSelectCurrentUser,
+  makeSelectAuthenticated
 };

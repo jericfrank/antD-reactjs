@@ -15,7 +15,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { makeSelectAuth } from './selectors';
+import { makeSelectAuthenticated, makeSelectCurrentUser } from './selectors';
 
 import Header from 'components/Header';
 
@@ -26,11 +26,11 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
   };
 
   renderHeader(){
-    const { auth } = this.props;
+    const { authenticated, currentUser } = this.props;
 
-    if ( auth.user ) {
+    if ( authenticated ) {
       return (
-        <Header user={auth.user}/>
+        <Header user={currentUser.user}/>
       );
     }
 
@@ -48,7 +48,8 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
 }
 
 const mapStateToProps = createStructuredSelector({
-  auth: makeSelectAuth()
+  currentUser: makeSelectCurrentUser(),
+  authenticated: makeSelectAuthenticated()
 });
 
 export default connect(mapStateToProps, null)(App);
