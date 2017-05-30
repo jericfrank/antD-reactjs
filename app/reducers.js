@@ -8,6 +8,7 @@ import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
+import { AUTH_TOKEN } from 'containers/App/constants';
 
 /*
  * routeReducer
@@ -37,11 +38,22 @@ function routeReducer(state = routeInitialState, action) {
   }
 }
 
+function authReducer(state = {}, action) {
+  switch (action.type) {
+    case AUTH_TOKEN:
+      return action.payload;
+
+    default:
+      return state;
+  }
+}
+
 /**
  * Creates the main reducer with the asynchronously loaded ones
  */
 export default function createReducer(asyncReducers) {
   return combineReducers({
+    authToken: authReducer,
     route: routeReducer,
     language: languageProviderReducer,
     ...asyncReducers,

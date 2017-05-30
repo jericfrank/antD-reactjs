@@ -13,6 +13,11 @@ const makeSelectError = () => createSelector(
   (substate) => substate.get( 'error' )
 );
 
+const makeSelectSuccess = () => createSelector(
+  selectLoginDomain(),
+  (substate) => substate.get( 'success' )
+);
+
 /**
  * Default selector used by Login
  */
@@ -25,5 +30,6 @@ const makeSelectLogin = () => createSelector(
 export default makeSelectLogin;
 export {
   selectLoginDomain,
-  makeSelectError
+  makeSelectError,
+  makeSelectSuccess
 };

@@ -10,7 +10,7 @@ import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import _ from 'lodash';
-import { makeSelectError } from './selectors';
+import { makeSelectError, makeSelectSuccess } from './selectors';
 import { FIELDS } from './constants';
 import { loginSubmit } from './actions';
 
@@ -63,6 +63,12 @@ export class Login extends React.PureComponent { // eslint-disable-line react/pr
       );
     }
 
+    if ( this.props.success ) {
+      html = (
+        <Alert message={this.props.success.message} type="success" />
+      );
+    }
+
     return html;
   }
 
@@ -103,7 +109,8 @@ Login.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  error: makeSelectError()
+  error: makeSelectError(),
+  success: makeSelectSuccess()
 });
 
 function mapDispatchToProps(dispatch) {

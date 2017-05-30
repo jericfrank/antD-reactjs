@@ -1,10 +1,12 @@
 import { take, call, put, select, takeLatest, fork } from 'redux-saga/effects';
+import { push } from 'react-router-redux';
 
 import { postRequest } from 'utils/request';
+import { handleJwtToken } from 'utils/jwtToken';
 
 import { LOGIN_SUBMIT } from './constants';
 
-import { loginSuccess, loginError } from './actions';
+import { loginSuccess, loginError, loginToken } from './actions';
 
 // Individual exports for testing
 export function* defaultSaga() {
@@ -16,7 +18,10 @@ export function* submit({ payload }) {
   try {
     const response = yield call( postRequest,'/auth/login', payload );
 
+    yield call( handleJwtToken, response );
+    yield put( loginToken( response ) );
     yield put( loginSuccess({ data: response, message: 'Success request' }) );
+    yield put( push( '/' ) );
   } catch ( err ) {
     yield put( loginError( err.error ) );
   }

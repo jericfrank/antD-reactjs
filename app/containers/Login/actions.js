@@ -11,6 +11,8 @@ import {
   LOGIN_ERROR
 } from './constants';
 
+import { AUTH_TOKEN } from 'containers/App/constants'
+
 export function defaultAction() {
   return {
     type: DEFAULT_ACTION,
@@ -34,6 +36,13 @@ export function loginSuccess ( payload ) {
 export function loginError ( payload ) {
   return {
     type    : LOGIN_ERROR,
+    payload
+  }
+}
+
+export function loginToken ( payload ) {
+  return {
+    type    : AUTH_TOKEN,
     payload
   }
 }
