@@ -5,6 +5,9 @@
  */
 
 export const DEFAULT_ACTION = 'app/Login/DEFAULT_ACTION';
+export const LOGIN_SUBMIT   = 'app/Register/LOGIN_SUBMIT';
+export const LOGIN_SUCCESS  = 'app/Register/LOGIN_SUCCESS';
+export const LOGIN_ERROR    = 'app/Register/LOGIN_ERROR';
 
 export const FIELDS = {
   UserName : {

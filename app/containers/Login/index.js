@@ -10,14 +10,15 @@ import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import _ from 'lodash';
-import makeSelectLogin from './selectors';
+import { makeSelectError } from './selectors';
 import { FIELDS } from './constants';
+import { loginSubmit } from './actions';
 
 import { RouteLinks } from 'containers/App/constants'
 
 import Field from 'components/Field';
 
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Alert, Form, Icon, Input, Button, Checkbox } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -33,13 +34,14 @@ export class Login extends React.PureComponent { // eslint-disable-line react/pr
 
     this.renderField  = this.renderField.bind( this );
     this.handleSubmit = this.handleSubmit.bind( this );
+    this.renderAlert  = this.renderAlert.bind( this );
   }
 
   handleSubmit(e){
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        this.props.loginSubmit( values );
       }
     });
   }
@@ -50,6 +52,18 @@ export class Login extends React.PureComponent { // eslint-disable-line react/pr
     return (
       <Field field={field} name={key} key={key} form={this.props.form} />
     );
+  }
+
+  renderAlert() {
+    let html = '';
+
+    if ( this.props.error ) {
+      html = (
+        <Alert message={this.props.error} type="error" />
+      );
+    }
+
+    return html;
   }
 
   render() {
@@ -67,6 +81,7 @@ export class Login extends React.PureComponent { // eslint-disable-line react/pr
             <DivHeader>
               <span>SILKROAD - LOGIN</span>
             </DivHeader>
+            { this.renderAlert() }
             { _.map( FIELDS, this.renderField )}
             <FormItem>
               <Button type="primary" htmlType="submit" className="login-form-button">
@@ -88,12 +103,13 @@ Login.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  Login: makeSelectLogin(),
+  error: makeSelectError()
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    loginSubmit : ( payload ) => dispatch( loginSubmit( payload ) ),
   };
 }
 

@@ -8,7 +8,10 @@ const selectLoginDomain = () => (state) => state.get('login');
 /**
  * Other specific selectors
  */
-
+const makeSelectError = () => createSelector(
+  selectLoginDomain(),
+  (substate) => substate.get( 'error' )
+);
 
 /**
  * Default selector used by Login
@@ -22,4 +25,5 @@ const makeSelectLogin = () => createSelector(
 export default makeSelectLogin;
 export {
   selectLoginDomain,
+  makeSelectError
 };
