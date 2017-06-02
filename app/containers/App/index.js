@@ -15,8 +15,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer } = Layout;
+
+import MenuList from 'components/MenuList';
+
+import { MenuLinks } from './constants';
 
 import { Logo } from './css';
 
@@ -41,16 +45,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
           <Logo>
             <div className="logo"/>
           </Logo>
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['2']}
-            style={{ lineHeight: '64px' }}
-          >
-            <Menu.Item key="1">nav 1</Menu.Item>
-            <Menu.Item key="2">nav 2</Menu.Item>
-            <Menu.Item key="3">nav 3</Menu.Item>
-          </Menu>
+          <MenuList links={MenuLinks}/>
         </Header>
         <Content style={{ padding: '0 50px', marginTop: 64 }}>
           <Breadcrumb style={{ margin: '12px 0' }}>

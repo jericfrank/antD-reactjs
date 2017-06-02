@@ -100,6 +100,26 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/logout',
+      name: 'logout',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/Logout/reducer'),
+          import('containers/Logout/sagas'),
+          import('containers/Logout'),
+        ]);
+
+        const renderRoute = loadModule(cb, UserIsAuthenticated);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('logout', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

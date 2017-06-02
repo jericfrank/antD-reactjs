@@ -7,7 +7,8 @@
 import { fromJS } from 'immutable';
 import {
   DEFAULT_ACTION,
-  APP_AUTH_TOKEN
+  APP_AUTH_TOKEN,
+  APP_AUTH_REMOVE_TOKEN
 } from './constants';
 
 const initialState = fromJS({
@@ -24,6 +25,11 @@ function globalReducer(state = initialState, action) {
       return state
         .set( 'currentUser', action.payload )
         .set( 'authenticated', true );
+
+    case APP_AUTH_REMOVE_TOKEN:
+      return state
+        .set( 'currentUser', {} )
+        .set( 'authenticated', false );
 
     default:
       return state;

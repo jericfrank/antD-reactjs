@@ -12,6 +12,7 @@
 export const DEFAULT_LOCALE = 'en';
 export const DEFAULT_ACTION = 'app/App/DEFAULT_ACTION';
 export const APP_AUTH_TOKEN = 'app/App/APP_AUTH_TOKEN';
+export const APP_AUTH_REMOVE_TOKEN = 'app/App/APP_AUTH_REMOVE_TOKEN';
 
 export const RouteLinks = [ {
   name  : 'Login',
@@ -19,4 +20,18 @@ export const RouteLinks = [ {
 }, {
   name  : 'Register',
   path  : '/register'
+} ];
+
+export const MenuLinks = [ {
+  name  : 'Home',
+  path  : '/',
+  icon  : 'home'
+}, {
+  name  : 'Test',
+  path  : '/test',
+  icon  : 'user'
+}, {
+  name  : 'Logout',
+  path  : '/logout',
+  icon  : 'logout'
 } ];
