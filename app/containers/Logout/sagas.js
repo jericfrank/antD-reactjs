@@ -1,6 +1,8 @@
 import { take, call, put, select, takeLatest, fork } from 'redux-saga/effects';
 import { browserHistory } from 'react-router';
 
+import { postRequest } from 'utils/request';
+
 import { expireJwtToken } from 'utils/jwtToken';
 
 import { LOGOUT_SUBMIT } from './constants';
@@ -13,14 +15,15 @@ export function* defaultSaga() {
   const watcher = yield fork( takeLatest, LOGOUT_SUBMIT, submit );
 }
 
-export function* submit() {
+export function* submit({ payload }) {
   try {
-    // const response = yield call( postRequest,'/auth/login', payload );
-    expireJwtToken();
+    const response = yield call( postRequest,'/auth/logout', payload );
 
     yield put( appLogoutToken() );
 
     browserHistory.push( '/login' );
+
+    expireJwtToken();
   } catch ( err ) {
     console.log( err );
   }

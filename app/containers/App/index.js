@@ -18,6 +18,7 @@ import { createStructuredSelector } from 'reselect';
 import { Layout, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer } = Layout;
 
+import withProgressBar from 'components/ProgressBar';
 import MenuList from 'components/MenuList';
 
 import { MenuLinks } from './constants';
@@ -41,7 +42,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
   renderLayout(){
     return (
       <Layout>
-        <Header style={{ position: 'fixed', width: '100%' }}>
+        <Header style={{ position: 'fixed', width: '100%', zIndex: 1 }}>
           <Logo>
             <div className="logo"/>
           </Logo>
@@ -53,7 +54,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
             <Breadcrumb.Item>List</Breadcrumb.Item>
             <Breadcrumb.Item>App</Breadcrumb.Item>
           </Breadcrumb>
-          <div style={{ background: '#fff', padding: 24, minHeight: 650 }}>
+          <div style={{ background: '#fff', padding: 24, minHeight: 850 }}>
             {React.Children.toArray(this.props.children)}
           </div>
         </Content>
@@ -79,5 +80,5 @@ const mapStateToProps = createStructuredSelector({
   authenticated: makeSelectAuthenticated()
 });
 
-export default connect(mapStateToProps, null)(App);
+export default connect(mapStateToProps, null)( withProgressBar(App) );
 

@@ -12,7 +12,7 @@ import { logoutSubmit } from './actions';
 
 export class Logout extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentWillMount () {
-    this.props.logoutSubmit();
+    this.props.logoutSubmit(this.props.authData);
   }
 
   render() {
@@ -35,7 +35,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    logoutSubmit: () => dispatch( logoutSubmit() )
+    logoutSubmit: ( payload ) => dispatch( logoutSubmit( payload ) )
   };
 }
 
