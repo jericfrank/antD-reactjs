@@ -53,6 +53,7 @@ import CryptoJS from 'crypto-js';
 import { appLoginToken } from 'containers/App/actions';
 
 import { expireJwtToken } from 'utils/jwtToken';
+import { setAuthorizationToken } from 'utils/request';
 // Create redux store with history
 // this uses the singleton browserHistory provided by react-router
 // Optionally, this could be changed to leverage a created history
@@ -74,11 +75,10 @@ const rootRoute = {
 };
 
 if ( localStorage.getItem( 'appToken' ) ) {
-  // temporary for users having localStorage remaining of greasyPrivileges
   try {
     const jsonString = CryptoJS.AES.decrypt( localStorage.getItem( 'appUser' ), localStorage.getItem( 'appToken' ) )
     const User       = JSON.parse( jsonString.toString( CryptoJS.enc.Utf8 ) );
-    // setAuthorizationToken( localStorage.getItem( 'greasyToken' ) );
+    setAuthorizationToken( localStorage.getItem( 'appToken' ) );
     store.dispatch( appLoginToken({ 'token' : localStorage.getItem( 'appToken' ), 'user' : User }) );
   } catch ( err ) {
     expireJwtToken();

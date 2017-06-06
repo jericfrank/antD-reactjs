@@ -31,6 +31,10 @@ export const MenuLinks = [ {
   path  : '/test',
   icon  : 'user'
 }, {
+  name  : 'Videos',
+  path  : '/videos',
+  icon  : 'camera'
+}, {
   name  : 'Upload Video',
   path  : '/uploader',
   icon  : 'upload'

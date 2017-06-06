@@ -42,7 +42,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
   renderLayout(){
     return (
       <Layout>
-        <Header style={{ position: 'fixed', width: '100%', zIndex: 1 }}>
+        <Header style={{ position: 'fixed', width: '100%', zIndex: 2 }}>
           <Logo>
             <div className="logo"/>
           </Logo>
